@@ -1,0 +1,45 @@
+	.globl hms_to_sec
+hms_to_sec:
+
+ 	movq %rdi, %r8 
+	imulq $3600,%r8
+	movq %rsi, %r9
+ 	imulq $60, %r9
+	movq %r8, %rax
+	addq %r9, %rax
+	addq %rdx, %rax
+	ret
+
+
+ 	.globl	sec_to_h #dele på 3600, siden 1 time er lik 3600 sekunder
+sec_to_h:
+
+	 movq %rdi, %rax #flytter 1.param til rax
+	 movq $3600, %r8
+	 cqo
+	 idivq %r8
+	 ret
+
+
+ .globl	sec_to_s
+sec_to_s:
+
+	 movq %rdi, %rax
+	 movq $60, %r10
+	 cqo
+	 idivq %r10
+	 movq %rdx, %rax
+	 ret
+
+
+ .globl	sec_to_m
+sec_to_m:
+
+	 movq %rdi, %rax
+	 movq $60, %r9
+	 cqo
+	 idivq %r9
+	 cqo
+	 idivq %r9
+	 movq %rdx, %rax
+	 ret
